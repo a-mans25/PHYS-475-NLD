@@ -3,7 +3,7 @@ import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
-# function that returns dy/dt
+# function that returns dx/dt
 def model(x,t):
     dxdt = np.sin(x)
     return dxdt
