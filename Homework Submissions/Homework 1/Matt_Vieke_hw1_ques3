@@ -1,0 +1,35 @@
+import numpy as np
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+
+# define values for g,k,m
+g = 9.8
+k = 20
+m = 10
+
+# function that returns dv/dt
+def model(v,t):
+    dvdt = g-((k*v*v)/m)
+    return dvdt
+
+# initial condition for v
+v0 = 0
+
+# time points
+t = np.linspace(0,10)
+
+# solve ODE
+v = odeint(model,v0,t)
+
+# plots t vs v(t)
+plt.plot(t,v)
+plt.xlabel('time')
+plt.ylabel('v(t)')
+plt.show()
+
+#plots v vs vdot
+dvdt = (v[1:]-v[:-1])/(t[1:]-t[:-1])
+plt.plot(v[1:],dvdt)
+plt.xlabel(r'$v$')
+plt.ylabel(r'$\dot{v}$')
+plt.show()
