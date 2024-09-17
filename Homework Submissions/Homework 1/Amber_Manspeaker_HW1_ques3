@@ -1,0 +1,43 @@
+import numpy as np
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+
+#initial conditions
+g = 9.8
+k= 0.01
+m = 10
+
+# function that returns dv/dt
+def model(v,t):
+    dvdt = g - (k/m)*v**2
+    return dvdt
+
+# initial condition
+v0 = [-np.sqrt(m*.9*g/k)]
+
+# time points
+t = np.linspace(0,50)
+
+# solve ODE
+v = odeint(model,v0,t)
+
+# plot results
+plt.plot(t,v, linewidth = 1, color = 'hotpink')
+plt.title('Velocity vs Time Plot')
+plt.xlabel('time')
+plt.ylabel('v(t)')
+plt.show()
+
+#This shows the same graph as my second plot in part c. As t increases (shown by manipulating the t variable), the value of v(t) approached 100
+
+
+#%%
+
+dvdt = (v[1:]-v[:-1])/(t[1:]-t[:-1])
+plt.plot(v[1:],dvdt, linewidth = 1, color = 'hotpink')
+plt.title('Velocity Phase Space')
+plt.xlabel(r'$v$')
+plt.ylabel(r'$\dot{v}$')
+plt.show()
+
+#This shows the same symmetric (around 0), parabolic behaviour as was in my graphical analysis
