@@ -1,0 +1,25 @@
+import numpy as np
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+
+# function that returns dx/dt
+def logistic(x,t):
+    dxdt = np.sin(x)
+    return dxdt
+
+# initial condition
+x0 = [np.pi/4, np.pi/2, 7*np.pi/4]
+
+# time points
+t = np.linspace(0,10)
+
+for i in x0:
+    # solve ODE
+    x = odeint(logistic,i,t)
+
+    # plot results
+    plt.plot(t,x, linewidth = 1)
+plt.title('Position vs Time Plot')
+plt.xlabel('time')
+plt.ylabel('x(t)')
+plt.show()
